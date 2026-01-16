@@ -1,0 +1,6 @@
+[2025-12-09 09:40:29] (LOG) Erro de transação no validar.php: Erro de transação no banco de dados: Unknown column 'data_conclusao' in 'field list'
+[2025-12-09 12:47:05] (LOG) Erro de transação no validar.php: Erro de transação no banco de dados: Unknown column 'data_finalizacao' in 'field list'
+[2025-12-09 12:47:18] (LOG) Erro de transação no validar.php: Erro de transação no banco de dados: Unknown column 'data_finalizacao' in 'field list'
+[2025-12-09 12:47:39] (LOG) Erro de transação no validar.php: Erro de transação no banco de dados: Unknown column 'data_finalizacao' in 'field list'
+[2025-12-09 12:50:24] (LOG) Erro de transação no validar.php: Erro de transação no banco de dados: Unknown column 'data_finalizacao' in 'field list'
+[2025-12-09 12:53:19] (LOG) Erro de transação no validar.php: Erro de transação no banco de dados: Unknown column 'data_finalizacao' in 'field list'

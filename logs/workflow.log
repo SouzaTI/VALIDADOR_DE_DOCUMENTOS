@@ -1,0 +1,70 @@
+[2025-12-09 09:44:09] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-09 10:00:47] (LOG) Documento 1 **REJEITADO** na Etapa 2.
+[2025-12-09 11:11:10] (LOG) Documento 1 **REJEITADO** na Etapa 1.
+[2025-12-09 11:53:01] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-09 11:53:26] (LOG) Documento 1 **REJEITADO** na Etapa 2.
+[2025-12-09 12:44:09] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-09 12:44:21] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-09 12:44:29] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-09 12:46:28] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-09 12:52:14] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-09 14:14:43] (LOG) Documento 6 **FINALIZADO** (VALIDADO).
+[2025-12-09 14:14:56] (LOG) Documento 5 **FINALIZADO** (VALIDADO).
+[2025-12-09 14:15:10] (LOG) Documento 4 **REJEITADO** na Etapa 2.
+[2025-12-09 14:15:30] (LOG) Documento 3 **FINALIZADO** (VALIDADO).
+[2025-12-09 14:15:39] (LOG) Documento 2 **REJEITADO** na Etapa 2.
+[2025-12-09 15:00:41] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-09 15:00:59] (LOG) Documento 7 **REJEITADO** na Etapa 2.
+[2025-12-09 15:14:04] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-09 15:14:45] (LOG) Documento 8 **REJEITADO** na Etapa 2.
+[2025-12-09 15:15:34] (LOG) Workflow Etapa 2 iniciada para Matheus Cabral.
+[2025-12-09 15:15:50] (LOG) Documento 9 **REJEITADO** na Etapa 2.
+[2025-12-10 09:54:27] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-10 09:57:28] (LOG) Documento 10 **REJEITADO** na Etapa 2.
+[2025-12-10 10:31:28] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-10 10:31:37] (LOG) Documento 11 **REJEITADO** na Etapa 1.
+[2025-12-10 10:32:23] (LOG) Documento 12 **FINALIZADO** (VALIDADO).
+[2025-12-10 12:01:01] (LOG) Workflow Etapa 2 iniciada para Matheus Cabral.
+[2025-12-10 12:01:53] (LOG) Documento 13 **REJEITADO (PENDENTE_CORRECAO)** na Etapa 2. Motivo: 'Podemos melhorar nesse design'
+[2025-12-10 12:14:17] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-10 12:14:41] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-10 12:14:49] (LOG) Documento 14 **FINALIZADO** (VALIDADO).
+[2025-12-10 12:14:54] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-10 12:15:07] (LOG) Documento 15 **FINALIZADO** (VALIDADO).
+[2025-12-10 12:15:22] (LOG) Documento 16 **FINALIZADO** (VALIDADO).
+[2025-12-10 12:15:55] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-10 12:16:29] (LOG) Documento 17 **REJEITADO (PENDENTE_CORRECAO)** na Etapa 2. Motivo: 'ERRADISSIMO VENHA EM MINHA SALA'
+[2025-12-10 12:28:14] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-10 12:29:01] (LOG) Documento 18 **REJEITADO (PENDENTE)** na Etapa 2. Motivo: 'Flatou muita coisa'
+[2025-12-10 12:49:18] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-10 12:50:30] (LOG) Documento 19 **REJEITADO (PENDENTE)** na Etapa 2. Motivo: 'BLA BLA BLA'
+[2025-12-10 13:00:48] (LOG) Documento 20 **REJEITADO (PENDENTE)** na Etapa 1. Motivo: 'DOCUMENTO COMPLETAMENTE ERRADO'
+[2025-12-10 14:57:11] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-10 14:57:36] (LOG) Documento 21 **FINALIZADO** (VALIDADO).
+[2025-12-10 15:13:13] (LOG) Documento 22 **REJEITADO (PENDENTE)** na Etapa 1. Motivo: 'sadsa'
+[2025-12-10 15:13:23] (LOG) Documento 23 **REJEITADO (PENDENTE)** na Etapa 1. Motivo: 'vadgv'
+[2025-12-10 15:13:43] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-10 15:14:11] (LOG) Documento 24 **REJEITADO (PENDENTE)** na Etapa 2. Motivo: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+[2025-12-10 15:19:36] (LOG) Documento 25 **REJEITADO (PENDENTE)** na Etapa 1. Motivo: 'dsadsa'
+[2025-12-10 15:19:45] (LOG) Documento 26 **REJEITADO (PENDENTE)** na Etapa 1. Motivo: 'dsadsad'
+[2025-12-10 15:19:54] (LOG) Documento 27 **REJEITADO (PENDENTE)** na Etapa 1. Motivo: 'sdascxcz'
+[2025-12-10 15:21:00] (LOG) Documento 28 **REJEITADO (PENDENTE)** na Etapa 1. Motivo: 'swdasdas'
+[2025-12-10 15:21:13] (LOG) Documento 29 **REJEITADO (PENDENTE)** na Etapa 1. Motivo: 'savvzx'
+[2025-12-10 15:22:43] (LOG) Workflow Etapa 2 iniciada para Matheus Cabral.
+[2025-12-10 15:23:29] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-10 15:24:04] (LOG) Documento 31 **FINALIZADO** (VALIDADO).
+[2025-12-10 15:25:39] (LOG) Documento 30 **FINALIZADO** (VALIDADO).
+[2025-12-10 15:26:06] (LOG) Workflow Etapa 2 iniciada para Matheus Cabral.
+[2025-12-10 15:26:21] (LOG) Documento 32 **FINALIZADO** (VALIDADO).
+[2025-12-15 09:40:28] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-15 09:41:52] (LOG) Documento 1 **REJEITADO (PENDENTE)** na Etapa 2. Motivo: 'teste'
+[2025-12-15 10:27:28] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-15 10:45:20] (LOG) Documento 2 **FINALIZADO** (VALIDADO).
+[2025-12-15 10:45:59] (LOG) Workflow Etapa 2 iniciada para Matheus Cabral.
+[2025-12-15 10:46:38] (LOG) Documento 3 **FINALIZADO** (VALIDADO).
+[2025-12-15 11:28:36] (LOG) Workflow Etapa 2 iniciada para Jefferson Carvalho.
+[2025-12-15 11:29:10] (LOG) Documento 4 **REJEITADO (PENDENTE)** na Etapa 2. Motivo: 'TUDO ENGANAÇÃO'
+[2025-12-17 09:23:06] (LOG) Workflow Etapa 2 iniciada para Alex Cunha.
+[2025-12-17 10:07:16] (LOG) Documento 5 **FINALIZADO** (VALIDADO).
+[2025-12-17 18:28:24] (LOG) Workflow Etapa 2 iniciada para Matheus Cabral.
+[2025-12-18 08:49:08] (LOG) Workflow Etapa 3 iniciada para Alex Cunha.

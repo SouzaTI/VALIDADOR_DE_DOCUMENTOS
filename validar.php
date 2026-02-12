@@ -57,22 +57,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($http_code === 200 && isset($res['status']) && $res['status'] === 'sucesso') {
         $conn->begin_transaction();
         try {
-            $conn->query("UPDATE workflow_etapas SET status_etapa = 'VALIDADO', data_conclusao = NOW() WHERE doc_fk = $documento_id AND validador_fk = $validador_id");
-            $conn->query("UPDATE documentos SET status = 'VALIDADO' WHERE id = $documento_id");
+            // Define o status final com base na ação do botão (VALIDAR ou REJEITAR)
+            $status_final = ($acao === 'VALIDAR') ? 'VALIDADO' : 'REJEITADO';
+
+            // 1. Atualiza a etapa do workflow
+            $stmt_wf = $conn->prepare("UPDATE workflow_etapas SET status_etapa = ?, data_conclusao = NOW() WHERE doc_fk = ? AND validador_fk = ?");
+            $stmt_wf->bind_param("sii", $status_final, $documento_id, $validador_id);
+            $stmt_wf->execute();
+
+            // 2. Atualiza o status geral do documento
+            $stmt_doc = $conn->prepare("UPDATE documentos SET status = ? WHERE id = ?");
+            $stmt_doc->bind_param("si", $status_final, $documento_id);
+            $stmt_doc->execute();
+
             $conn->commit();
 
             if ($acao === 'VALIDAR') {
                 $caminho_final = $res['caminho']; 
-
-                // Só envia se houver e-mails no banco (removido o padrão fixo)
                 if (!empty($notificar_emails)) {
                     $lista = explode(',', $notificar_emails);
-
                     foreach ($lista as $email) {
                         $email_limpo = trim($email);
                         if (filter_var($email_limpo, FILTER_VALIDATE_EMAIL)) {
                             try {
-                                // PASSANDO TODOS OS PARÂMETROS: Destinatário, ID, Caminho, Assinante e Nome do Arquivo
                                 enviar_notificacao_email($email_limpo, $documento_id, $caminho_final, $assinante_real, $nome_arquivo);
                             } catch (Exception $e_mail) {
                                 write_log("Erro e-mail $email_limpo: " . $e_mail->getMessage(), 'email_erro.log');
@@ -80,12 +87,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                     }
                 }
+                echo "<script>alert('Documento Validado com Sucesso!'); window.location.href='painel.php';</script>";
+            } else {
+                // CORREÇÃO: Busca robusta de quem fez o upload (Autor)
+                $stmt_autor = $conn->prepare("SELECT u.email, u.nome FROM usuarios u JOIN documentos d ON u.id = d.validador_fk WHERE d.id = ?");
+                $stmt_autor->bind_param("i", $documento_id);
+                $stmt_autor->execute();
+                $res_autor = $stmt_autor->get_result()->fetch_assoc();
+
+                if($res_autor && !empty($res_autor['email'])) {
+                    // Aqui garantimos o envio para o e-mail do autor (Matheus) 
+                    // O $assinante_real (Jefferson) aparece apenas como o validador que recusou
+                    enviar_notificacao_email_rejeicao(
+                        $res_autor['email'], 
+                        $res_autor['nome'], 
+                        $documento_id, 
+                        $assinante_real, 
+                        "O documento não foi aprovado pelo gestor e precisa de correções."
+                    );
+                }
+                echo "<script>alert('Documento REJEITADO com sucesso! O autor foi notificado.'); window.location.href='painel.php';</script>";
             }
-            
-            echo "<script>";
-            echo "alert('Documento Validado com Sucesso!');";
-            echo "window.location.href='painel.php';";
-            echo "</script>";
             exit;
 
         } catch (Exception $e) { 

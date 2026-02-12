@@ -81,9 +81,9 @@ $res_meus_envios = $stmt_me->get_result();
         .btn-secondary { background: #333; color: #fff; border: 1px solid #444; margin-right: 5px; }
         .btn-outline-danger { border: 1px solid #f44336; color: #f44336; }
         .status-badge { padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
-        .status-validado { background: #2e7d32; color: #fff; }
-        .status-em_fluxo { background: #f57c00; color: #fff; }
-        .status-rejeitado { background: #d32f2f; color: #fff; }
+        .status-pendente { background: #f57c00; color: #fff; } /* Laranja para pendente */
+        .status-validado { background: #2e7d32; color: #fff; } /* Verde para aprovado */
+        .status-rejeitado { background: #d32f2f; color: #fff; } /* Vermelho para reprovado */
     </style>
 </head>
 <body>

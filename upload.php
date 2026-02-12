@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require_once 'db.php'; 
+require_once 'notificar.php'; // Importante para carregar a função de alerta
 
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: login.php");
@@ -42,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['pdf_upload'])) {
                 throw new Exception("Falha ao mover arquivo.");
             }
 
-            $sql_doc = "INSERT INTO documentos (nome_arquivo, caminho_original, validador_fk, status, data_upload, categoria, notificar_emails) VALUES (?, ?, ?, 'EM_FLUXO', ?, ?, ?)";
+            $sql_doc = "INSERT INTO documentos (nome_arquivo, caminho_original, validador_fk, status, data_upload, categoria, notificar_emails) VALUES (?, ?, ?, 'PENDENTE', ?, ?, ?)";
             $stmt_doc = $conn->prepare($sql_doc);
             $stmt_doc->bind_param("ssisss", 
                 $nome_arquivo_original, 
@@ -61,6 +62,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['pdf_upload'])) {
             $stmt_wf->execute();
             
             $conn->commit(); 
+
+            // --- NOVO: ALERTA AUTOMÁTICO AO GESTOR SELECIONADO ---
+            $stmt_g = $conn->prepare("SELECT nome, email FROM usuarios WHERE id = ?");
+            $stmt_g->bind_param("i", $assinante_escolhido_id);
+            $stmt_g->execute();
+            $res_gestor = $stmt_g->get_result()->fetch_assoc();
+
+            if ($res_gestor && !empty($res_gestor['email'])) {
+                enviar_alerta_pendencia_gestor(
+                    $res_gestor['email'], 
+                    $res_gestor['nome'], 
+                    $novo_doc_id, 
+                    $nome_arquivo_original, 
+                    $_SESSION['usuario_nome'] ?? 'Remetente'
+                );
+            }
+            // ---------------------------------------------------
             
             // Em vez de redirecionar direto pelo PHP, avisamos o JS que deu certo
             $sucesso_js = true; 

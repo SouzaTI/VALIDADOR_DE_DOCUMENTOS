@@ -23,9 +23,24 @@ $url_pdf = "arquivos/" . basename(!empty($caminho_carim) ? $caminho_carim : $cam
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $acao = $_POST['acao'];
     $pin_digitado = $_POST['pin'];
+    $motivo = $_POST['motivo'] ?? '';
     $pagina = $_POST['pagina'] ?? 1;
     $x = $_POST['pos_x'] ?? 400; 
     $y = $_POST['pos_y'] ?? 50;
+
+    // --- NOVA VALIDAÇÃO DE PIN CRIPTOGRAFADO ---
+    $stmt_pin = $conn->prepare("SELECT pin_validacao FROM usuarios WHERE id = ?");
+    $stmt_pin->bind_param("i", $validador_id);
+    $stmt_pin->execute();
+    $stmt_pin->bind_result($pin_hash_banco);
+    $stmt_pin->fetch();
+    $stmt_pin->close();
+
+    if (!password_verify($pin_digitado, $pin_hash_banco)) {
+        echo "<script>alert('PIN de Transação Inválido!'); window.history.back();</script>";
+        exit;
+    }
+    // --------------------------------------------
 
     $user_agent = $_SERVER['HTTP_USER_AGENT'];
     $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
@@ -36,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'validador_id' => $validador_id,
         'pin_digitado' => $pin_digitado,
         'acao' => $acao,
+        'motivo' => $motivo,
         'ordem_etapa' => $ordem_atual,
         'pagina' => $pagina,
         'x' => $x,
@@ -189,10 +205,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </fieldset>
 
             <label>Ação Final:</label>
-            <select name="acao">
-                <option value="VALIDAR">VALIDAR E NOTIFICAR SETORES</option>
+            <select name="acao" id="select-acao" onchange="toggleMotivo()"> <option value="VALIDAR">VALIDAR E NOTIFICAR SETORES</option>
                 <option value="REJEITAR">REJEITAR</option>
             </select>
+
+            <div id="container-motivo" style="display:none; margin-top: 10px;">
+                <label style="color: #f44336; font-weight: bold;">Motivo da Rejeição:</label>
+                <textarea name="motivo" id="campo-motivo" rows="3" style="width:100%; background:#2c2c2c; color:white; border:1px solid #444; border-radius:6px; padding:10px;"></textarea>
+            </div>
+
             <button type="submit">Confirmar e Finalizar Fluxo</button>
         </form>
     </div>
@@ -239,6 +260,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             btnMarcar.innerText = '🎯 Mapear Posição no Clique';
             btnMarcar.style.background = '#2196F3';
         });
+
+        function toggleMotivo() {
+            const acao = document.getElementById('select-acao').value;
+            const container = document.getElementById('container-motivo');
+            const campo = document.getElementById('campo-motivo');
+            
+            if (acao === 'REJEITAR') {
+                container.style.display = 'block';
+                campo.required = true;
+            } else {
+                container.style.display = 'none';
+                campo.required = false;
+            }
+        }
+
     </script>
 </body>
 </html>

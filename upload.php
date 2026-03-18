@@ -28,7 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['pdf_upload'])) {
     $nome_arquivo_original = $arquivo['name'];
     $categoria_selecionada = $_POST['categoria'] ?? 'GERAL';
     $assinante_escolhido_id = $_POST['assinante_id']; 
-    $emails_notificacao = $_POST['notificar_emails'] ?? '';
+    $emails_post = $_POST['notificar_emails'] ?? [];
+    $emails_notificacao = is_array($emails_post) ? implode(', ', $emails_post) : $emails_post;
     $data_upload_mysql = date('Y-m-d H:i:s');
     $nome_final = time() . "_" . preg_replace("/[^a-zA-Z0-9.]/", "_", $nome_arquivo_original);
     
@@ -123,8 +124,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['pdf_upload'])) {
                 <?php endforeach; ?>
             </select>
 
-            <label>E-mails para notificar após assinatura:</label>
-            <textarea name="notificar_emails" rows="2" placeholder="fiscal@empresa.com, financeiro@empresa.com"></textarea>
+            <label>E-mails para notificar (Busque na Matriz):</label>
+            <select name="notificar_emails[]" id="select-emails" multiple class="form-control"></select>
 
             <label>Categoria:</label>
             <select name="categoria">
@@ -135,11 +136,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['pdf_upload'])) {
         </form>
     </div>
 
+<link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+
     <script>
         <?php if($sucesso_js): ?>
             alert("✅ NF enviada com sucesso para o gestor!\nVocê poderá acompanhar o status no seu painel.");
             window.location.href = "painel.php";
         <?php endif; ?>
+
+        new TomSelect('#select-emails', {
+            plugins: ['remove_button'],
+            valueField: 'id',
+            labelField: 'text',
+            searchField: 'text',
+            load: function(query, callback) {
+                var url = 'buscar_contatos.php?q=' + encodeURIComponent(query);
+                fetch(url)
+                    .then(response => response.json())
+                    .then(json => {
+                        callback(json);
+                    }).catch(()=>{
+                        callback();
+                    });
+            },
+            placeholder: "Digite o nome, setor ou e-mail...",
+            render: {
+                option: function(item, escape) {
+                    return '<div>' + escape(item.text) + '</div>';
+                },
+                item: function(item, escape) {
+                    return '<div>' + escape(item.text) + '</div>';
+                }
+            }
+        });
+
     </script>
 </body>
 </html>

@@ -7,15 +7,8 @@ if (!isset($_SESSION['usuario_id'])) {
     exit;
 }
 
-// --- CONFIGURAÇÃO DE CONEXÃO ---
-$host = '127.0.0.1';
-$port = 3307; 
-$db = 'db_svd';
-$user = 'root';
-$pass = '';
-$url_base = 'http://192.168.0.63:8080/validador_documentos'; 
+require_once __DIR__ . '/db.php';
 
-$conn = new mysqli($host, $user, $pass, $db, $port);
 if ($conn->connect_error) {
     die("Falha na Conexão com o Banco de Dados: " . $conn->connect_error);
 }

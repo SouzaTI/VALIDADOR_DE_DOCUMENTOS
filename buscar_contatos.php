@@ -2,14 +2,12 @@
 // buscar_contatos.php
 header('Content-Type: application/json');
 
-// Configurações do Banco da Intranet
-$host_intra = '127.0.0.1';
-$user_intra = 'root';
-$pass_intra = '';
-$db_intra   = 'intranet';
-$port_intra = 3307; // Conforme sua imagem do PHPMyAdmin
+// Puxa o cofre de credenciais centralizado
+require_once __DIR__ . '/db.php';
 
-$conn_intra = new mysqli($host_intra, $user_intra, $pass_intra, $db_intra, $port_intra);
+// Como o db.php nativo conecta no banco db_svd, trocamos apenas para o banco da Intranet
+$conn_intra = $conn;
+$conn_intra->select_db('intranet');
 
 if ($conn_intra->connect_error) {
     echo json_encode([]);
